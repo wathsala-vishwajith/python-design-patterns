@@ -1,3 +1,7 @@
+# The real reason that borg is different comes down to subclassing.
+# If you subclass a borg, the subclass' objects have the same state as their parents classes objects, unless you explicitly override the shared state in that subclass. Each subclass of the singleton pattern has its own state and therefore will produce different objects.
+# Also in the singleton pattern the objects are actually the same, not just the state (even though the state is the only thing that really matters).
+# https://stackoverflow.com/questions/1318406/why-is-the-borg-pattern-better-than-the-singleton-pattern-in-python
 class Borg:
     
     """The Borg design pattern"""
