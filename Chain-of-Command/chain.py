@@ -2,13 +2,14 @@ class Handler: #Abstract handler
 	"""Abstract Handler"""
 	def __init__(self, successor):
 		# Define who is the next handler
+		self.successor = successor
 
 	def handle(self, request):
 			handled = self._handle(request) #If handled, stop here
 
 			#Otherwise, keep going
 			if not handled:
-					
+				self.successor.handle(request)
 
 	def _handle(self, request):
 		raise NotImplementedError('Must provide implementation in subclass!')
@@ -33,18 +34,18 @@ class Client: # Using handlers
 	def __init__(self):
 		# Create handlers and use them in a sequence you want
 		                                                      # Note that the default handler has no successor
-
+		self.handler = ConcreteHandler1(DefaultHandler(None))
 	def delegate(self, requests): # Send your requests one at a time for handlers to handle
 		for request in requests:
 				self.handler.handle(request)
 
 # Create a client
-
+c = Client()
 
 # Create requests
 requests = []
 
 # Send the requests
-
+c.delegate([2, 5, 30])
 
 
